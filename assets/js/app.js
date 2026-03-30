@@ -63,8 +63,9 @@ const App = (() => {
 
   async function loadFooter() {
     try {
-      const res = await fetch('data/footer.json');
-      const data = await res.json();
+      const res = await fetch('https://raw.githubusercontent.com/mightora/mightora.io/refs/heads/main/data/footer.yaml');
+      const text = await res.text();
+      const data = jsyaml.load(text);
       renderFooter(data);
     } catch (_) { /* silently ignore */ }
   }
