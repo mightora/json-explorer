@@ -1,0 +1,94 @@
+{
+  "brands": [
+    {
+      "name": "mightora.io",
+      "url": "https://mightora.io",
+      "logo": "https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png",
+      "description": "Free tools for the Power Platform community"
+    },
+    {
+      "name": "Tech Tweedie",
+      "url": "https://techtweedie.github.io",
+      "logo": "https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/TechTweedie_bw.png",
+      "description": "Technical blog and tutorials by Ian Tweedie"
+    },
+    {
+      "name": "Tweed.technology",
+      "url": "https://tweed.technology",
+      "logo": "https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/tweedTechnologyLogoLight.png",
+      "description": "Technology consulting by Ian Tweedie"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Site",
+      "column": 1,
+      "position": 1,
+      "links": [
+        { "name": "Tools", "url": "/tools/" },
+        { "name": "About", "url": "/about/" },
+        { "name": "FAQ", "url": "/faq/" },
+        { "name": "Privacy Policy", "url": "/privacy/" },
+        { "name": "Analytics", "url": "/analytics/" }
+      ]
+    },
+    {
+      "title": "Mightora Tools",
+      "column": 2,
+      "position": 1,
+      "links": [
+        { "name": "Pipeline Tools", "url": "/tools/cicd/" },
+        { "name": "PCF Controls", "url": "/tools/pcf/" },
+        { "name": "Power Automate Connectors", "url": "/tools/power-automate-connectors/" },
+        { "name": "Power Automate Templates", "url": "/tools/power-automate-templates/" },
+        { "name": "Developer Tools", "url": "/tools/developer/" },
+        { "name": "WiFi Captive Portal Helper ↗", "url": "http://connect.mightora.io/" }
+      ]
+    },
+    {
+      "title": "VS Code Extensions",
+      "column": 2,
+      "position": 2,
+      "links": [
+        { "name": "Power Platform Documentation ↗", "url": "https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-power-platform-devOps-extension" },
+        { "name": "Playwright for Power Platform ↗", "url": "https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-playwright-for-power-platform" },
+        { "name": "Upload MD To Wiki ↗", "url": "https://marketplace.visualstudio.com/items?itemName=mightoraio.upload-md-to-wiki" },
+        { "name": "Commit to Repo ↗", "url": "https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-commit-to-repo-extension" },
+        { "name": "Power Platform Solution Modifier ↗", "url": "https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-power-platform-solution-modifier" }
+      ]
+    },
+    {
+      "title": "Community",
+      "column": 3,
+      "position": 1,
+      "links": [
+        { "name": "GitHub ↗", "url": "https://github.com/mightora" },
+        { "name": "YouTube ↗", "url": "https://youtube.com/@techtweedie" },
+        { "name": "Medium ↗", "url": "https://medium.com/@ian.tweedie" },
+        { "name": "LinkedIn ↗", "url": "https://go.iantweedie.biz/LinkedIn-Linktree" },
+        { "name": "Sessionize ↗", "url": "https://sessionize.com/ian-tweedie/" },
+        { "name": "Power Platform Clinic ↗", "url": "https://powerplatformclinic.github.io" }
+      ]
+    },
+    {
+      "title": "Microsoft Learn",
+      "column": 3,
+      "position": 2,
+      "links": [
+        { "name": "Calculate Working Day Connector ↗", "url": "https://learn.microsoft.com/en-us/connectors/calculateworkingday/" },
+        { "name": "Email Domain Checker Connector ↗", "url": "https://learn.microsoft.com/en-us/connectors/emaildomainchecker/" }
+      ]
+    },
+    {
+      "title": "Contact",
+      "column": 3,
+      "position": 3,
+      "links": [
+        { "name": "Contact ↗", "url": "https://iantweedie.biz" },
+        { "name": "Status Page ↗", "url": "https://stats.uptimerobot.com/3EPW8gBu4N" },
+        { "name": "All Links ↗", "url": "https://linktr.ee/itweedie" },
+        { "name": "Coaching ↗", "url": "https://partners.simply.coach/ian-tweedie" }
+      ]
+    }
+  ]
+}
