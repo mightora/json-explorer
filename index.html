@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Explorer Pro — The Ultimate JSON Workspace</title>
+  <meta name="description" content="Parse, explore, diff, transform and visualise JSON instantly. Everything runs in your browser — your data never leaves your machine.">
+  <meta name="keywords" content="JSON, JSON explorer, JSON formatter, JSON diff, JSON visualiser, JSON tools, developer tools">
+  <meta name="author" content="Ian Tweedie / Mightora">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="JSON Explorer Pro — The Ultimate JSON Workspace">
+  <meta property="og:description" content="Explore, diff, transform and visualise JSON instantly. All processing in your browser. No uploads.">
+  <meta property="og:type"        content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="site-logo">
+        <div class="site-logo-icon"><i class="fas fa-code"></i></div>
+        <span class="site-logo-text">JSON Explorer <span>Pro</span></span>
+      </a>
+
+      <nav class="header-nav" id="header-nav">
+        <a href="#workspace">Workspace</a>
+        <a href="#insights-section">Insights</a>
+        <a href="#privacy-section">Privacy</a>
+        <a href="#help-section">Help</a>
+        <a href="https://mightora.io" target="_blank" rel="noopener">Mightora.io ↗</a>
+      </nav>
+
+      <div class="flex-gap">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>JSON Explorer Pro</h1>
+      <p class="hero-sub">The Ultimate JSON Workspace</p>
+      <p class="hero-desc">
+        Parse, explore, diff, transform and visualise JSON instantly.
+        Everything runs in your browser — your data never leaves your machine.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge">🔒 100% Private</span>
+        <span class="hero-badge">⚡ Instant Processing</span>
+        <span class="hero-badge">🌐 No Backend</span>
+        <span class="hero-badge">📂 No Uploads</span>
+        <span class="hero-badge">🆓 Free Forever</span>
+      </div>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" id="hero-cta-explore">
+          <i class="fas fa-rocket"></i> Start Exploring
+        </button>
+        <button class="btn btn-secondary btn-lg" id="hero-cta-sample">
+          <i class="fas fa-database"></i> Load Sample Data
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       JSON INPUT
+  ═══════════════════════════════════════════════════════ -->
+  <section class="input-section" id="input-section">
+    <div class="container-wide">
+      <div class="input-panel">
+        <div class="input-panel-header">
+          <div class="input-panel-title">
+            <i class="fas fa-paste text-accent"></i>
+            JSON Input
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-ghost btn-sm" id="btn-load-sample">
+              <i class="fas fa-database"></i> Sample
+            </button>
+            <button class="btn btn-ghost btn-sm" id="btn-copy-input">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+            <button class="btn btn-ghost btn-sm" id="btn-clear">
+              <i class="fas fa-trash"></i> Clear
+            </button>
+            <label class="btn btn-ghost btn-sm" for="file-input" style="cursor:pointer">
+              <i class="fas fa-upload"></i> Upload
+            </label>
+            <input type="file" id="file-input" accept=".json,.txt" style="display:none">
+          </div>
+        </div>
+        <div class="input-panel-body">
+          <textarea
+            id="json-input"
+            class="json-textarea"
+            placeholder='Paste your JSON here, or drag & drop a .json file…
+
+Example:
+{
+  "name": "JSON Explorer Pro",
+  "version": "1.0",
+  "awesome": true
+}'
+            spellcheck="false"
+            autocomplete="off"
+            aria-label="JSON input"
+          ></textarea>
+
+          <!-- Validation message -->
+          <div class="validation-message" id="validation-msg"></div>
+
+          <!-- Input stats -->
+          <div class="input-stats" id="input-stats"></div>
+
+          <!-- Drop zone -->
+          <div class="drop-zone" id="drop-zone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span class="drop-zone-text">Drag & drop a .json file here, or click to browse</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       WORKSPACE TABS
+  ═══════════════════════════════════════════════════════ -->
+  <section class="workspace-section" id="workspace">
+    <div class="container-wide">
+      <!-- Tab Bar -->
+      <div class="workspace-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="tab-explore" role="tab" aria-selected="true">
+          <i class="fas fa-sitemap tab-icon"></i>
+          <span class="tab-label">Explore</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-diff" role="tab">
+          <i class="fas fa-code-branch tab-icon"></i>
+          <span class="tab-label">Diff</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-transform" role="tab">
+          <i class="fas fa-magic tab-icon"></i>
+          <span class="tab-label">Transform</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-insights" role="tab">
+          <i class="fas fa-chart-pie tab-icon"></i>
+          <span class="tab-label">Insights</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-visualise" role="tab">
+          <i class="fas fa-chart-bar tab-icon"></i>
+          <span class="tab-label">Visualise</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-sensitive" role="tab">
+          <i class="fas fa-shield-alt tab-icon"></i>
+          <span class="tab-label">Sensitive Data</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-help" role="tab">
+          <i class="fas fa-question-circle tab-icon"></i>
+          <span class="tab-label">Help</span>
+        </button>
+      </div>
+
+      <!-- ── EXPLORE TAB ────────────────────────────────────── -->
+      <div id="tab-explore" class="tab-panel active" role="tabpanel">
+        <div class="view-toolbar">
+          <div class="view-mode-btns">
+            <button class="view-mode-btn active" data-view="tree">
+              <i class="fas fa-sitemap"></i> Tree
+            </button>
+            <button class="view-mode-btn" data-view="formatted">
+              <i class="fas fa-align-left"></i> Formatted
+            </button>
+            <button class="view-mode-btn" data-view="minified">
+              <i class="fas fa-compress-arrows-alt"></i> Minified
+            </button>
+            <button class="view-mode-btn" data-view="table">
+              <i class="fas fa-table"></i> Table
+            </button>
+          </div>
+
+          <div class="flex-gap flex-wrap">
+            <div class="search-bar">
+              <i class="fas fa-search search-bar-icon"></i>
+              <input type="text" id="explore-search" placeholder="Search keys & values…" aria-label="Search JSON">
+              <span class="search-count" id="search-count"></span>
+              <div class="search-nav">
+                <button id="search-prev" title="Previous match" aria-label="Previous match">↑</button>
+                <button id="search-next" title="Next match" aria-label="Next match">↓</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="explore-output">
+          <div class="empty-state">
+            <div class="empty-state-icon">🔍</div>
+            <h3>Nothing to explore yet</h3>
+            <p>Paste JSON or load a file to begin.</p>
+          </div>
+        </div>
+
+        <!-- Node detail panel -->
+        <div id="node-detail" class="node-detail" style="display:none"></div>
+      </div>
+
+      <!-- ── DIFF TAB ───────────────────────────────────────── -->
+      <div id="tab-diff" class="tab-panel" role="tabpanel">
+        <div class="diff-inputs">
+          <div>
+            <div class="diff-label">⬅ Left (Original)</div>
+            <textarea
+              id="diff-left"
+              class="json-textarea"
+              placeholder='{"name": "Alice", "age": 30}'
+              style="min-height:180px"
+              spellcheck="false"
+            ></textarea>
+          </div>
+          <div>
+            <div class="diff-label">Right (Modified) ➡</div>
+            <textarea
+              id="diff-right"
+              class="json-textarea"
+              placeholder='{"name": "Alice", "age": 31, "city": "London"}'
+              style="min-height:180px"
+              spellcheck="false"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-bottom:1rem">
+          <button class="btn btn-primary" id="btn-run-diff">
+            <i class="fas fa-exchange-alt"></i> Compare
+          </button>
+          <label class="flex-center gap-sm" style="font-size:.875rem;cursor:pointer">
+            <input type="checkbox" id="diff-show-same" checked> Show unchanged
+          </label>
+        </div>
+
+        <div class="diff-output card card-flat" id="diff-output-wrap">
+          <div class="diff-summary" id="diff-summary"></div>
+          <div id="diff-output">
+            <div class="empty-state">
+              <div class="empty-state-icon">⚖️</div>
+              <h3>Paste JSON into both panels</h3>
+              <p>Add JSON to the left and right panels above, then click Compare.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TRANSFORM TAB ─────────────────────────────────── -->
+      <div id="tab-transform" class="tab-panel" role="tabpanel">
+        <div class="transform-grid">
+          <div>
+            <h4 style="margin-bottom:.75rem">Operations</h4>
+            <div class="transform-ops">
+              <button class="transform-op-btn" data-op="pretty">
+                <i class="fas fa-align-left transform-op-icon"></i>
+                <div>
+                  <div>Pretty Print</div>
+                  <div class="transform-op-desc">Format with 2-space indent</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="minify">
+                <i class="fas fa-compress transform-op-icon"></i>
+                <div>
+                  <div>Minify</div>
+                  <div class="transform-op-desc">Remove all whitespace</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="sort-keys">
+                <i class="fas fa-sort-alpha-down transform-op-icon"></i>
+                <div>
+                  <div>Sort Keys</div>
+                  <div class="transform-op-desc">Alphabetically sort all keys</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="remove-nulls">
+                <i class="fas fa-ban transform-op-icon"></i>
+                <div>
+                  <div>Remove Nulls</div>
+                  <div class="transform-op-desc">Remove all null values</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="remove-empty">
+                <i class="fas fa-trash-alt transform-op-icon"></i>
+                <div>
+                  <div>Remove Empty</div>
+                  <div class="transform-op-desc">Remove nulls, empty strings, arrays & objects</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="flatten">
+                <i class="fas fa-layer-group transform-op-icon"></i>
+                <div>
+                  <div>Flatten</div>
+                  <div class="transform-op-desc">Flatten nested JSON to dot-notation keys</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="unflatten">
+                <i class="fas fa-object-group transform-op-icon"></i>
+                <div>
+                  <div>Unflatten</div>
+                  <div class="transform-op-desc">Rebuild nested structure from flat keys</div>
+                </div>
+              </button>
+              <button class="transform-op-btn" data-op="parse-escaped">
+                <i class="fas fa-quote-right transform-op-icon"></i>
+                <div>
+                  <div>Parse Escaped JSON</div>
+                  <div class="transform-op-desc">Decode escaped/stringified JSON</div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Extract subtree -->
+            <div style="margin-top:1.25rem">
+              <label class="form-label">Extract Subtree</label>
+              <div class="flex-gap">
+                <input
+                  type="text"
+                  id="extract-path-input"
+                  class="form-control"
+                  placeholder="e.g. users[0] or config.limits"
+                  aria-label="Path to extract"
+                >
+                <button class="btn btn-secondary btn-sm" id="btn-extract-path" style="white-space:nowrap">
+                  <i class="fas fa-cut"></i> Extract
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex-between" style="margin-bottom:.75rem">
+              <h4>Output</h4>
+              <div class="btn-group">
+                <button class="btn btn-ghost btn-sm" id="transform-copy">
+                  <i class="fas fa-copy"></i> Copy
+                </button>
+                <button class="btn btn-ghost btn-sm" id="transform-download">
+                  <i class="fas fa-download"></i> Download
+                </button>
+              </div>
+            </div>
+            <div class="json-output full-height" id="transform-output" style="min-height:400px">
+              <div class="empty-state">
+                <div class="empty-state-icon">✨</div>
+                <h3>Choose a transformation</h3>
+                <p>Select an operation from the left to transform your JSON.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INSIGHTS TAB ──────────────────────────────────── -->
+      <div id="tab-insights" class="tab-panel" role="tabpanel">
+        <div id="insights-output">
+          <div class="empty-state">
+            <div class="empty-state-icon">📊</div>
+            <h3>Insights will appear here</h3>
+            <p>Paste valid JSON and switch to this tab to see analysis.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VISUALISE TAB ─────────────────────────────────── -->
+      <div id="tab-visualise" class="tab-panel" role="tabpanel">
+        <div class="vis-controls">
+          <label class="form-label" style="margin:0">Visualisation:</label>
+          <select class="vis-select" id="vis-type-select" aria-label="Visualisation type">
+            <option value="auto">Auto-detect</option>
+            <option value="table">Table</option>
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+            <option value="pie">Pie / Donut</option>
+            <option value="tree">Structure Tree</option>
+          </select>
+          <button class="btn btn-secondary btn-sm" id="vis-refresh">
+            <i class="fas fa-sync"></i> Refresh
+          </button>
+        </div>
+        <div class="vis-output" id="vis-output">
+          <div class="empty-state">
+            <div class="empty-state-icon">📈</div>
+            <h3>Visualisation will appear here</h3>
+            <p>Paste valid JSON and switch to this tab. Arrays of objects work best.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SENSITIVE DATA TAB ─────────────────────────────── -->
+      <div id="tab-sensitive" class="tab-panel" role="tabpanel">
+        <div id="sensitive-output">
+          <div class="empty-state">
+            <div class="empty-state-icon">🛡️</div>
+            <h3>Sensitive data scanner</h3>
+            <p>Paste valid JSON to scan for potentially sensitive fields like passwords, tokens, and PII.</p>
+          </div>
+        </div>
+
+        <!-- JWT Decoder standalone -->
+        <div class="divider"></div>
+        <div class="card card-sm">
+          <h4 style="margin-bottom:.75rem"><i class="fas fa-key text-accent"></i> JWT Decoder</h4>
+          <p class="text-muted" style="margin-bottom:.75rem;font-size:.875rem">
+            Paste a JWT token below to decode its header and payload.
+            <strong>Signatures are not verified.</strong>
+          </p>
+          <div class="flex-gap">
+            <input
+              type="text"
+              id="jwt-input"
+              class="form-control"
+              placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…"
+              spellcheck="false"
+              aria-label="JWT token input"
+            >
+            <button class="btn btn-secondary btn-sm" id="btn-decode-jwt" style="white-space:nowrap">
+              <i class="fas fa-unlock"></i> Decode
+            </button>
+          </div>
+          <div id="jwt-decode-output" class="jwt-section" style="display:none;margin-top:1rem"></div>
+        </div>
+      </div>
+
+      <!-- ── HELP TAB ──────────────────────────────────────── -->
+      <div id="tab-help" class="tab-panel" role="tabpanel">
+        <div class="help-grid">
+          <div class="help-card card">
+            <div class="help-card-icon">🔍</div>
+            <h3>Explore Mode</h3>
+            <p>Navigate your JSON visually.</p>
+            <ul>
+              <li>Click arrows to expand/collapse nodes</li>
+              <li>Search keys &amp; values in real-time</li>
+              <li>Copy key, value, or path with one click</li>
+              <li>Switch between Tree, Formatted, Minified and Table views</li>
+              <li>Pin selected node details below the tree</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">⚖️</div>
+            <h3>Diff Mode</h3>
+            <p>Compare two JSON documents structurally.</p>
+            <ul>
+              <li>Paste Left (original) and Right (modified)</li>
+              <li>Click Compare to see differences</li>
+              <li>Added items shown in green (+)</li>
+              <li>Removed items shown in red (−)</li>
+              <li>Changed values shown in orange (~)</li>
+              <li>Toggle "Show unchanged" to focus on changes</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">✨</div>
+            <h3>Transform Mode</h3>
+            <p>Reshape your JSON with one click.</p>
+            <ul>
+              <li>Pretty print or minify</li>
+              <li>Sort keys alphabetically</li>
+              <li>Remove nulls or empty values</li>
+              <li>Flatten to dot-notation</li>
+              <li>Unflatten back to nested</li>
+              <li>Parse escaped JSON strings</li>
+              <li>Extract a subtree by path</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">📊</div>
+            <h3>Insights Mode</h3>
+            <p>Instant metrics about your JSON.</p>
+            <ul>
+              <li>Total keys, objects, arrays, values</li>
+              <li>Maximum nesting depth</li>
+              <li>Null and empty value counts</li>
+              <li>Type distribution chart</li>
+              <li>Most repeated key names</li>
+              <li>Likely timestamp fields (decoded)</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">📈</div>
+            <h3>Visualise Mode</h3>
+            <p>See your data as charts and tables.</p>
+            <ul>
+              <li>Auto-detects arrays, time-series, categories</li>
+              <li>Bar, line, pie/donut charts</li>
+              <li>Sortable, filterable table view</li>
+              <li>Structure tree diagram</li>
+              <li>Select fields for custom charts</li>
+              <li>Export data as CSV</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">🛡️</div>
+            <h3>Sensitive Data Mode</h3>
+            <p>Find and mask sensitive fields.</p>
+            <ul>
+              <li>Detects passwords, tokens, API keys, PII</li>
+              <li>Shows severity level per field</li>
+              <li>Mask values with one click</li>
+              <li>Export masked JSON for safe sharing</li>
+              <li>Auto-detects &amp; decodes JWT tokens</li>
+              <li>Separate JWT decode panel</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">📁</div>
+            <h3>Input Methods</h3>
+            <p>Multiple ways to load your JSON.</p>
+            <ul>
+              <li>Paste directly into the text area</li>
+              <li>Drag &amp; drop a <code>.json</code> file</li>
+              <li>Click Upload to browse files</li>
+              <li>Load the built-in sample data</li>
+              <li>Session restore on page refresh</li>
+            </ul>
+          </div>
+
+          <div class="help-card card">
+            <div class="help-card-icon">⚠️</div>
+            <h3>Error Help</h3>
+            <p>Common JSON mistakes and fixes.</p>
+            <ul>
+              <li><strong>Trailing comma</strong> — Remove last comma before <code>}</code> or <code>]</code></li>
+              <li><strong>Single quotes</strong> — JSON requires double quotes</li>
+              <li><strong>Unquoted keys</strong> — Keys must be in double quotes</li>
+              <li><strong>Missing comma</strong> — Add commas between properties</li>
+              <li><strong>Use Auto-repair</strong> — Button appears for common errors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /container-wide -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PRIVACY SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section class="privacy-section" id="privacy-section">
+    <div class="container">
+      <div class="section-header" style="text-align:center">
+        <h2>🔒 Your Data Stays With You</h2>
+        <p>JSON Explorer Pro is built with privacy as a core principle.</p>
+      </div>
+      <div class="privacy-cards">
+        <div class="privacy-card">
+          <div class="privacy-icon">🖥️</div>
+          <div>
+            <h4>Local Processing</h4>
+            <p>All JSON parsing, analysis and transformation happens entirely in your browser using JavaScript.</p>
+          </div>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">🚫</div>
+          <div>
+            <h4>No Uploads</h4>
+            <p>Your JSON is never sent to any server. There is no backend, no API, no data collection.</p>
+          </div>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">🔑</div>
+          <div>
+            <h4>No Sign-in Required</h4>
+            <p>No account, no email, no tracking. Use all features anonymously, forever.</p>
+          </div>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">🛡️</div>
+          <div>
+            <h4>Safe for Sensitive Data</h4>
+            <p>You can safely paste JSON containing tokens, passwords, and PII — it never leaves your machine.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       AUTHOR SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section class="author-section" id="author-section">
+    <!-- Rendered dynamically from config.json -->
+    <div class="container">
+      <div class="author-card">
+        <div class="author-img-wrap">
+          <img
+            src="https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/author/ian-tweedie-presenting-4.png"
+            alt="Ian Tweedie"
+            class="author-img"
+            onerror="this.style.display='none'"
+          >
+        </div>
+        <div class="author-info">
+          <div class="author-brand">TechTweedie</div>
+          <h2 class="author-name">Ian Tweedie</h2>
+          <div class="author-role">Microsoft MVP | Power Platform Architect | Developer</div>
+          <p class="author-bio">
+            Ian Tweedie is a Microsoft MVP and Power Platform architect at Tweed.technology.
+            He creates free developer tools through Mightora and shares knowledge via the TechTweedie
+            blog and YouTube channel.
+          </p>
+          <div class="author-links">
+            <a href="https://github.com/itweedie" target="_blank" rel="noopener" class="author-link">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://youtube.com/@techtweedie" target="_blank" rel="noopener" class="author-link">
+              <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://go.iantweedie.biz/LinkedIn-Linktree" target="_blank" rel="noopener" class="author-link">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://medium.com/@ian.tweedie" target="_blank" rel="noopener" class="author-link">
+              <i class="fab fa-medium"></i> Medium
+            </a>
+            <a href="https://iantweedie.biz" target="_blank" rel="noopener" class="author-link">
+              <i class="fas fa-globe"></i> Website
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-main" id="footer-main">
+        <!-- Rendered by app.js from footer.json -->
+      </div>
+    </div>
+
+    <div id="footer-brands">
+      <!-- Rendered by app.js from footer.json -->
+    </div>
+
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          &copy; <span id="footer-year"></span>
+          <a href="https://mightora.io" target="_blank" rel="noopener">Mightora.io</a>
+          &amp; <a href="https://techtweedie.github.io" target="_blank" rel="noopener">TechTweedie</a>.
+          Built by <a href="https://iantweedie.biz" target="_blank" rel="noopener">Ian Tweedie</a>.
+          All processing is local — your data never leaves your browser.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="https://github.com/mightora/json-explorer" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://mightora.io" target="_blank" rel="noopener">Mightora.io ↗</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════ -->
+  <script src="assets/js/json-parser.js"></script>
+  <script src="assets/js/json-tree.js"></script>
+  <script src="assets/js/json-diff.js"></script>
+  <script src="assets/js/json-transform.js"></script>
+  <script src="assets/js/json-insights.js"></script>
+  <script src="assets/js/visualise.js"></script>
+  <script src="assets/js/sensitive-data.js"></script>
+  <script src="assets/js/jwt-helper.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <script>
+    // Set copyright year
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
