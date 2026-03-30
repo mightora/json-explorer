@@ -40,28 +40,25 @@ const App = (() => {
   function renderAuthor(author) {
     const sec = document.getElementById('author-section');
     if (!sec || !author) return;
+    const avatarUrl  = 'https://techtweedie.github.io/images/author/ian-tweedie-sq2_hu_a380911c6f4726de.png';
+    const blogLogo   = 'https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/site/main-logo.png';
+    const brandLabel = author.branding ? author.branding.label : 'TechTweedie';
     sec.innerHTML = `
-      <div class="container">
-        <div class="author-card">
-          <div class="author-img-wrap">
-            <img src="${UI.escHtml(author.image)}" alt="${UI.escHtml(author.name)}" class="author-img" onerror="this.style.display='none'">
+      <div class="author-section-overlay">
+        <div class="author-section-inner">
+          <div class="author-photos">
+            <img src="${UI.escHtml(avatarUrl)}" alt="${UI.escHtml(author.name)}" class="author-avatar" onerror="this.style.display='none'">
+            <img src="${UI.escHtml(blogLogo)}" alt="${UI.escHtml(brandLabel)}" class="author-blog-logo" onerror="this.style.display='none'">
           </div>
-          <div class="author-info">
-            <div class="author-brand">${UI.escHtml(author.branding.label)}</div>
-            <h2 class="author-name">${UI.escHtml(author.name)}</h2>
-            <div class="author-role">${UI.escHtml(author.role)}</div>
+          <div class="author-text">
+            <h2 class="author-heading">Built by ${UI.escHtml(brandLabel)}</h2>
             <p class="author-bio">${UI.escHtml(author.bio)}</p>
             <div class="author-links">
-              ${author.links.map(l => `
-                <a href="${UI.escHtml(l.url)}" target="_blank" rel="noopener" class="author-link">
-                  <i class="${UI.escHtml(l.icon)}"></i> ${UI.escHtml(l.label)}
-                </a>
-              `).join('')}
+              ${(author.links || []).map(l => `<a href="${UI.escHtml(l.url)}" target="_blank" rel="noopener" class="author-link">${l.icon ? `<i class="${UI.escHtml(l.icon)}"></i> ` : ''}${UI.escHtml(l.label)}</a>`).join('')}
             </div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }
 
   async function loadFooter() {
@@ -197,6 +194,15 @@ const App = (() => {
       document.getElementById('input-section')?.scrollIntoView({ behavior: 'smooth' });
     });
     document.getElementById('hero-cta-sample')?.addEventListener('click', loadSample);
+
+    // Nav links with data-activate-tab (e.g. "Insights" link)
+    document.querySelectorAll('[data-activate-tab]').forEach(link => {
+      link.addEventListener('click', () => {
+        const tabId = link.dataset.activateTab;
+        UI.activateTab(tabId);
+        if (_currentData) refreshTab(tabId);
+      });
+    });
 
     // Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {

@@ -39,8 +39,8 @@ const UI = (() => {
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('json-explorer-theme', theme);
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+    // The sun/moon SVG icons are toggled via CSS ([data-theme="dark"] .icon-sun { display:none })
+    // so we do not need to write innerHTML here
   }
 
   function toggleTheme() {

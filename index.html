@@ -3,15 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JSON Explorer Pro — The Ultimate JSON Workspace</title>
-  <meta name="description" content="Parse, explore, diff, transform and visualise JSON instantly. Everything runs in your browser — your data never leaves your machine.">
-  <meta name="keywords" content="JSON, JSON explorer, JSON formatter, JSON diff, JSON visualiser, JSON tools, developer tools">
-  <meta name="author" content="Ian Tweedie / Mightora">
+  <title>JSON Explorer — Free JSON Tool by Mightora.io</title>
+  <meta name="description" content="Free browser-based JSON tool. Explore, format, diff, transform and visualise JSON instantly. 100% private — all processing happens in your browser, your data never leaves your machine.">
+  <meta name="keywords" content="JSON explorer, JSON formatter, JSON validator, JSON diff, JSON visualiser, JSON transformer, JSON tools, free JSON tool, browser JSON, developer tools, JSON pretty print, JSON compare, JSON flatten, mightora">
+  <meta name="author" content="Ian Tweedie / Mightora.io">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mightora.github.io/json-explorer/">
+  <link rel="sitemap" type="application/xml" href="/json-explorer/sitemap.xml">
 
   <!-- Open Graph -->
-  <meta property="og:title"       content="JSON Explorer Pro — The Ultimate JSON Workspace">
-  <meta property="og:description" content="Explore, diff, transform and visualise JSON instantly. All processing in your browser. No uploads.">
+  <meta property="og:title"       content="JSON Explorer — Free JSON Tool by Mightora.io">
+  <meta property="og:description" content="Free browser-based JSON tool. Explore, format, diff, transform and visualise JSON. 100% private — your data never leaves your browser.">
   <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://mightora.github.io/json-explorer/">
+  <meta property="og:image"       content="https://mightora.github.io/json-explorer/assets/images/og-image.png">
+  <meta property="og:site_name"   content="Mightora.io">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="JSON Explorer — Free JSON Tool by Mightora.io">
+  <meta name="twitter:description" content="Explore, diff, transform and visualise JSON instantly. Free, private and browser-only.">
+  <meta name="twitter:image"       content="https://mightora.github.io/json-explorer/assets/images/og-image.png">
+  <meta name="twitter:site"        content="@TechTweedie">
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Explorer",
+    "url": "https://mightora.github.io/json-explorer/",
+    "description": "Free browser-based JSON tool. Explore, format, diff, transform and visualise JSON. Your data never leaves your browser.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": "JSON formatting, JSON diff, JSON transform, JSON visualisation, JSON schema analysis, JWT decoder, sensitive data scanner",
+    "author": {
+      "@type": "Person",
+      "name": "Ian Tweedie",
+      "url": "https://iantweedie.biz",
+      "sameAs": ["https://techtweedie.github.io", "https://github.com/itweedie"]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Mightora",
+      "url": "https://mightora.io"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage (SEO rich results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is JSON Explorer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON Explorer is a free browser-based developer tool that lets you explore, format, compare (diff), transform and visualise JSON data. Everything runs in your browser — no data is ever uploaded to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data safe when using JSON Explorer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. All processing happens entirely in your browser using JavaScript. There is no backend server, no API calls with your data, and no analytics that capture your JSON. You can safely paste tokens, passwords and sensitive configurations." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I compare two JSON files?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Switch to the Diff tab in JSON Explorer. Paste your original JSON in the left panel and the modified version in the right panel, then click Compare. Added fields are shown in green, removed in red, and changed values in orange." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is JSON?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON (JavaScript Object Notation) is a lightweight text format for storing and exchanging data. It is human-readable and widely used for API responses, configuration files and data storage. It consists of key-value pairs wrapped in curly braces for objects and square brackets for arrays." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use JSON Explorer offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Once the page has loaded in your browser, all the core tools (explore, diff, transform, insights, visualise) work without an internet connection. Only the initial page load requires connectivity." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a JWT token?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A JWT (JSON Web Token) is a compact, URL-safe way to represent information between two parties. It consists of three parts separated by dots: a header, a payload, and a signature. JSON Explorer's JWT decoder lets you inspect the header and payload without sending the token to any server." }
+      }
+    ]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,25 +114,46 @@
   ═══════════════════════════════════════════════════════ -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="/" class="site-logo">
-        <div class="site-logo-icon"><i class="fas fa-code"></i></div>
-        <span class="site-logo-text">JSON Explorer <span>Pro</span></span>
+
+      <a href="/" class="site-logo" aria-label="JSON Explorer — Mightora.io">
+        <!-- Light-mode logo -->
+        <img
+          src="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png"
+          alt="Mightora.io"
+          class="site-logo-brand-img logo-light"
+          onerror="this.style.display='none'"
+        >
+        <!-- Dark-mode logo (inverted) -->
+        <img
+          src="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900_invert.png"
+          alt="Mightora.io"
+          class="site-logo-brand-img logo-dark"
+          onerror="this.style.display='none'"
+        >
+        <span class="site-logo-divider" aria-hidden="true"></span>
+        <span class="site-logo-text">JSON <span>Explorer</span></span>
       </a>
 
-      <nav class="header-nav" id="header-nav">
+      <nav class="header-nav" id="header-nav" aria-label="Main navigation">
         <a href="#workspace">Workspace</a>
-        <a href="#insights-section">Insights</a>
+        <a href="#workspace" data-activate-tab="tab-insights">Insights</a>
         <a href="#privacy-section">Privacy</a>
         <a href="#help-section">Help</a>
-        <a href="https://mightora.io" target="_blank" rel="noopener">Mightora.io ↗</a>
+        <a href="https://mightora.io" target="_blank" rel="noopener" class="ext-link">Mightora.io ↗</a>
       </nav>
 
       <div class="flex-gap">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-          <i class="fas fa-bars"></i>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+          <!-- Sun icon (shown in dark mode to switch to light) -->
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <!-- Moon icon (shown in light mode to switch to dark) -->
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open navigation menu">
+          <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
       </div>
+
     </div>
   </header>
 
@@ -61,8 +162,8 @@
   ═══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="container hero-content">
-      <h1>JSON Explorer Pro</h1>
-      <p class="hero-sub">The Ultimate JSON Workspace</p>
+      <h1>JSON Explorer</h1>
+      <p class="hero-sub">Free Developer Tools by <a href="https://mightora.io" target="_blank" rel="noopener" style="color:#60a5fa;text-decoration:none;">Mightora.io</a></p>
       <p class="hero-desc">
         Parse, explore, diff, transform and visualise JSON instantly.
         Everything runs in your browser — your data never leaves your machine.
@@ -73,6 +174,7 @@
         <span class="hero-badge">🌐 No Backend</span>
         <span class="hero-badge">📂 No Uploads</span>
         <span class="hero-badge">🆓 Free Forever</span>
+        <span class="hero-badge">🛠️ by mightora.io</span>
       </div>
       <div class="hero-cta">
         <button class="btn btn-primary btn-lg" id="hero-cta-explore">
@@ -120,7 +222,7 @@
 
 Example:
 {
-  "name": "JSON Explorer Pro",
+  "name": "JSON Explorer Demo",
   "version": "1.0",
   "awesome": true
 }'
@@ -398,6 +500,7 @@ Example:
             <option value="line">Line Chart</option>
             <option value="pie">Pie / Donut</option>
             <option value="tree">Structure Tree</option>
+            <option value="boxes">Nested Boxes</option>
           </select>
           <button class="btn btn-secondary btn-sm" id="vis-refresh">
             <i class="fas fa-sync"></i> Refresh
@@ -566,13 +669,351 @@ Example:
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
+       HELP SECTION (standalone — SEO-visible, no JS needed)
+  ═══════════════════════════════════════════════════════ -->
+  <section id="help-section" class="help-page-section">
+    <div class="container">
+
+      <!-- ── HOW IT WORKS ────────────────────────────────────────── -->
+      <div style="text-align:center;margin-bottom:2.5rem">
+        <span class="section-label">How it works</span>
+        <h2 style="margin:.5rem 0 .5rem">Three steps. Zero uploads.</h2>
+        <p class="text-muted" style="max-width:500px;margin:0 auto">JSON Explorer runs entirely in your browser. No account, no server, no waiting.</p>
+      </div>
+
+      <div class="how-it-works">
+        <div class="hiw-step">
+          <div class="hiw-num">1</div>
+          <div class="hiw-icon">📋</div>
+          <h3>Paste or upload your JSON</h3>
+          <p>Type, paste or drag &amp; drop a <code>.json</code> file. Your data stays local.</p>
+        </div>
+        <div class="hiw-arrow" aria-hidden="true">→</div>
+        <div class="hiw-step">
+          <div class="hiw-num">2</div>
+          <div class="hiw-icon">🛠️</div>
+          <h3>Pick your tool</h3>
+          <p>Choose from Explore, Diff, Transform, Insights, Visualise or Scanner — all free.</p>
+        </div>
+        <div class="hiw-arrow" aria-hidden="true">→</div>
+        <div class="hiw-step">
+          <div class="hiw-num">3</div>
+          <div class="hiw-icon">⚡</div>
+          <h3>Get instant results</h3>
+          <p>Results appear in milliseconds. Nothing ever leaves your machine.</p>
+        </div>
+      </div>
+
+      <!-- Privacy diagram -->
+      <div class="browser-only-diagram">
+        <div class="bod-box accent-border">💻 Your browser &mdash; everything happens here</div>
+        <div class="bod-arrow">↑ ↓</div>
+        <div class="bod-box">📄 Your JSON (stays on your device)</div>
+        <div class="bod-arrow" style="color:var(--danger)">&#x26D4;</div>
+        <div class="bod-blocked">
+          <span class="bod-strike">🌐 No server · No upload · No tracking</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- ── TOOLS SHOWCASE ───────────────────────────────────────── -->
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span class="section-label">What you can do</span>
+        <h2 style="margin:.5rem 0 .5rem">Seven tools, one page</h2>
+        <p class="text-muted" style="max-width:560px;margin:0 auto">Everything you need to work with JSON — no switching between sites.</p>
+      </div>
+
+      <div class="tools-showcase">
+        <div class="tool-card">
+          <div class="tool-card-icon">🌳</div>
+          <h3>Explore</h3>
+          <p>Browse your JSON like a folder tree. Click to expand, collapse and copy any value or path.</p>
+          <span class="tool-card-tag">Great for: debugging API responses</span>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-icon">⚖️</div>
+          <h3>Diff &amp; Compare</h3>
+          <p>Paste two versions of your JSON side by side. See exactly what changed, was added or removed.</p>
+          <span class="tool-card-tag">Great for: reviewing config changes</span>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-icon">✨</div>
+          <h3>Transform</h3>
+          <p>Pretty-print, minify, sort keys, flatten dot-notation, remove nulls, or extract a subtree.</p>
+          <span class="tool-card-tag">Great for: cleaning up messy JSON</span>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-icon">📊</div>
+          <h3>Insights</h3>
+          <p>Instantly see key counts, nesting depth, data types and repeated keys as visual metrics.</p>
+          <span class="tool-card-tag">Great for: understanding unfamiliar data</span>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-icon">📈</div>
+          <h3>Visualise</h3>
+          <p>Turn arrays into bar, line or pie charts. Show objects as nested colour-coded boxes. Export as CSV.</p>
+          <span class="tool-card-tag">Great for: data analysis and presentations</span>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-icon">🛡️</div>
+          <h3>Sensitive Data Scanner</h3>
+          <p>Scan for passwords, API keys, tokens and PII. Mask values before sharing with your team.</p>
+          <span class="tool-card-tag">Great for: safe log sharing</span>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-icon">🔑</div>
+          <h3>JWT Decoder</h3>
+          <p>Paste a JWT token to instantly see its header and payload. No server, signatures not verified.</p>
+          <span class="tool-card-tag">Great for: auth debugging</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- ── WHO IS IT FOR ───────────────────────────────────────── -->
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span class="section-label">Who is it for?</span>
+        <h2 style="margin:.5rem 0 .5rem">Built for everyone who works with JSON</h2>
+      </div>
+
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <div class="use-case-icon">💻</div>
+          <div>
+            <h4>Frontend developers</h4>
+            <p>Debug API responses, inspect state objects and validate payloads during development.</p>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">⚙️</div>
+          <div>
+            <h4>Backend developers</h4>
+            <p>Verify endpoint output, diff before and after schema migrations, format nested configs.</p>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">🧪</div>
+          <div>
+            <h4>QA engineers</h4>
+            <p>Compare expected vs actual API responses and confirm the right fields are present.</p>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">📊</div>
+          <div>
+            <h4>Data analysts</h4>
+            <p>Explore JSON datasets, chart numeric fields and export tables as CSV without any code.</p>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">☁️</div>
+          <div>
+            <h4>DevOps &amp; SRE</h4>
+            <p>Inspect cloud config files, compare Terraform state files and scan for leaked credentials.</p>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">📚</div>
+          <div>
+            <h4>Students &amp; learners</h4>
+            <p>Learn JSON structure visually. Understand nesting, types and key names with the tree explorer.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- ── FAQ ───────────────────────────────────────────── -->
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span class="section-label">FAQ</span>
+        <h2 style="margin:.5rem 0 .5rem">Frequently asked questions</h2>
+        <p class="text-muted" style="max-width:500px;margin:0 auto">Everything you need to know about JSON Explorer.</p>
+      </div>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary class="faq-question">What is JSON? <span></span></summary>
+          <div class="faq-answer">
+            <strong>JSON</strong> (JavaScript Object Notation) is a lightweight text format for storing and exchanging data.
+            It uses <strong>key–value pairs</strong> inside curly braces <code>{}</code> for objects and square brackets <code>[]</code> for lists (arrays).
+            It is the most common format for web APIs, configuration files, and data storage.
+            <br><br>Example of valid JSON:<br>
+            <code>{&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 30, &quot;active&quot;: true}</code>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What is JSON Explorer? <span></span></summary>
+          <div class="faq-answer">
+            JSON Explorer is a <strong>free, browser-based developer tool</strong> that gives you seven tools in one page:
+            explore, diff, transform, insights, visualise, sensitive data scanner and a JWT decoder.
+            Built by <strong>Ian Tweedie</strong> and hosted by <strong>Mightora.io</strong>.
+            No account required, no data uploaded, completely free forever.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Is my data safe to paste here? <span></span></summary>
+          <div class="faq-answer">
+            <strong>Yes, completely.</strong> All processing happens entirely in your browser using JavaScript.
+            There is no backend server, no API that receives your data, and no analytics that capture your JSON content.
+            You can safely paste API keys, passwords, tokens and confidential configuration files.
+            Close the browser tab and the data is gone.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">How do I format and pretty-print JSON? <span></span></summary>
+          <div class="faq-answer">
+            Paste your JSON into the input box and it is automatically formatted.
+            To explicitly pretty-print or minify, switch to the <strong>Transform</strong> tab and click
+            <strong>Pretty Print</strong> or <strong>Minify</strong>.
+            You can also sort keys alphabetically and remove nulls in the same tab.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">How do I compare two JSON files? <span></span></summary>
+          <div class="faq-answer">
+            Switch to the <strong>Diff</strong> tab. Paste your original JSON in the left box and the
+            modified version in the right box, then click <strong>Compare</strong>.
+            <ul style="margin:.5rem 0 0 1rem">
+              <li><span style="color:#059669">➕ Green</span> — fields added in the right version</li>
+              <li><span style="color:#d62828">➖ Red</span> — fields removed from the left version</li>
+              <li><span style="color:#e76f51">∼ Orange</span> — values that changed</li>
+            </ul>
+            Toggle “Show unchanged” to focus only on differences.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What is JSON flattening? <span></span></summary>
+          <div class="faq-answer">
+            JSON flattening converts a deeply <strong>nested object</strong> into a single-level object
+            where keys are separated by dots to show the path.
+            For example <code>{&quot;user&quot;:{&quot;name&quot;:&quot;Alice&quot;}}</code> becomes
+            <code>{&quot;user.name&quot;:&quot;Alice&quot;}</code>.
+            Use the <strong>Flatten</strong> button in the Transform tab. Use Unflatten to reverse it.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What is a JWT token and how do I decode one? <span></span></summary>
+          <div class="faq-answer">
+            A <strong>JWT</strong> (JSON Web Token) is a compact, URL-safe string with three dot-separated parts:
+            a <em>header</em>, a <em>payload</em> and a <em>signature</em>.
+            It is used to pass identity information (claims) between systems.
+            <br><br>
+            Switch to the <strong>Sensitive Data</strong> tab and scroll to the JWT Decoder panel.
+            Paste your JWT token and click <strong>Decode</strong> to see the header and payload.
+            Note: <strong>signatures are not verified</strong> — the tool just reads the encoded data.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">How do I find sensitive data in my JSON? <span></span></summary>
+          <div class="faq-answer">
+            Switch to the <strong>Sensitive Data</strong> tab after pasting your JSON.
+            The scanner automatically flags fields whose names suggest sensitive content — such as
+            <code>password</code>, <code>token</code>, <code>apiKey</code>, <code>secret</code>,
+            <code>email</code> and many more.
+            Each finding shows a severity level (<em>high / medium / low</em>) and an explanation.
+            Use the <strong>Mask values</strong> toggle to blur the actual values before sharing a screenshot.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Can I use JSON Explorer offline? <span></span></summary>
+          <div class="faq-answer">
+            Once the page has loaded in your browser, all seven tools work without an internet connection.
+            Only the initial page load requires connectivity (to fetch fonts, icons and Chart.js).
+            There is no server communication once the page is open.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What file types can I upload? <span></span></summary>
+          <div class="faq-answer">
+            The Upload button and drag-and-drop accept <code>.json</code> and <code>.txt</code> files.
+            Any text file that contains valid JSON will work.
+            Maximum practical file size depends on your browser and device memory.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Why does my JSON show an error? <span></span></summary>
+          <div class="faq-answer">
+            Common JSON mistakes:
+            <ul style="margin:.5rem 0 0 1rem">
+              <li><strong>Trailing comma</strong> — remove the last comma before <code>}</code> or <code>]</code></li>
+              <li><strong>Single quotes</strong> — JSON requires double quotes around strings and keys</li>
+              <li><strong>Unquoted keys</strong> — write <code>&quot;name&quot;</code> not <code>name</code></li>
+              <li><strong>Missing comma</strong> — add commas between all items in an array or object</li>
+              <li><strong>Comments</strong> — standard JSON does not support comments (<code>// ...</code> or <code>/* */</code>)</li>
+            </ul>
+            When the error is auto-fixable, a <strong>Auto-repair</strong> button appears below the input.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">How do I visualise JSON data as a chart? <span></span></summary>
+          <div class="faq-answer">
+            Switch to the <strong>Visualise</strong> tab after pasting your JSON.
+            JSON Explorer auto-detects the best chart type:
+            <ul style="margin:.5rem 0 0 1rem">
+              <li><strong>Arrays of objects</strong> with a date field → line chart (time series)</li>
+              <li><strong>Arrays of objects</strong> with a string + number field → bar chart</li>
+              <li><strong>Arrays of strings</strong> → pie chart (frequency)</li>
+              <li><strong>Objects with numeric values</strong> → bar chart</li>
+            </ul>
+            Use the dropdown to switch to <em>Table</em>, <em>Nested Boxes</em> or <em>Structure Tree</em> at any time.
+            Tables can be exported as CSV.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What is the Nested Boxes view? <span></span></summary>
+          <div class="faq-answer">
+            The <strong>Nested Boxes</strong> view (in the Visualise tab) shows your JSON as a set of
+            colour-coded nested containers — one box per object or array, with each depth level getting
+            a different colour. This makes it very easy to see the <em>structure</em> and
+            <em>hierarchy</em> of your data at a glance, even without reading the actual values.
+            <br><br>
+            It is especially useful for understanding deeply nested API responses or configuration files
+            where the shape of the data matters more than the values.
+          </div>
+        </details>
+
+      </div><!-- /faq-list -->
+
+      <!-- Privacy promise badges -->
+      <hr class="divider">
+      <div style="text-align:center;margin-bottom:1rem">
+        <span class="section-label">Privacy promise</span>
+        <h2 style="margin:.5rem 0">Your data never leaves your browser</h2>
+      </div>
+      <div class="privacy-promise">
+        <div class="pp-badge"><span class="pp-badge-icon">🖥️</span> Runs in your browser</div>
+        <div class="pp-badge"><span class="pp-badge-icon">🚫</span> No server</div>
+        <div class="pp-badge"><span class="pp-badge-icon">🔒</span> No data storage</div>
+        <div class="pp-badge"><span class="pp-badge-icon">🆓</span> No sign-in required</div>
+        <div class="pp-badge"><span class="pp-badge-icon">🌐</span> Open source</div>
+        <div class="pp-badge"><span class="pp-badge-icon">🇥</span> Free forever</div>
+      </div>
+
+    </div><!-- /container -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
        PRIVACY SECTION
   ═══════════════════════════════════════════════════════ -->
   <section class="privacy-section" id="privacy-section">
     <div class="container">
       <div class="section-header" style="text-align:center">
         <h2>🔒 Your Data Stays With You</h2>
-        <p>JSON Explorer Pro is built with privacy as a core principle.</p>
+        <p>JSON Explorer is built with privacy as a core principle.</p>
       </div>
       <div class="privacy-cards">
         <div class="privacy-card">
@@ -611,42 +1052,36 @@ Example:
        AUTHOR SECTION
   ═══════════════════════════════════════════════════════ -->
   <section class="author-section" id="author-section">
-    <!-- Rendered dynamically from config.json -->
-    <div class="container">
-      <div class="author-card">
-        <div class="author-img-wrap">
+    <div class="author-section-overlay">
+      <div class="author-section-inner">
+        <div class="author-photos">
           <img
-            src="https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/author/ian-tweedie-presenting-4.png"
+            src="https://techtweedie.github.io/images/author/ian-tweedie-sq2_hu_a380911c6f4726de.png"
             alt="Ian Tweedie"
-            class="author-img"
+            class="author-avatar"
+            onerror="this.style.display='none'"
+          >
+          <img
+            src="https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/site/main-logo.png"
+            alt="TechTweedie"
+            class="author-blog-logo"
             onerror="this.style.display='none'"
           >
         </div>
-        <div class="author-info">
-          <div class="author-brand">TechTweedie</div>
-          <h2 class="author-name">Ian Tweedie</h2>
-          <div class="author-role">Microsoft MVP | Power Platform Architect | Developer</div>
+        <div class="author-text">
+          <h2 class="author-heading">Built by TechTweedie</h2>
           <p class="author-bio">
-            Ian Tweedie is a Microsoft MVP and Power Platform architect at Tweed.technology.
-            He creates free developer tools through Mightora and shares knowledge via the TechTweedie
-            blog and YouTube channel.
+            JSON Explorer is a free tool created by <strong>Ian Tweedie</strong> — also known online as <strong>TechTweedie</strong>.
+            Ian is a technology consultant and developer based in North East England with a background in enterprise IT,
+            cloud infrastructure, and developer tooling. He builds free, practical tools through
+            <strong>Mightora.io</strong> and writes about technology on his blog.
           </p>
           <div class="author-links">
-            <a href="https://github.com/itweedie" target="_blank" rel="noopener" class="author-link">
-              <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="https://youtube.com/@techtweedie" target="_blank" rel="noopener" class="author-link">
-              <i class="fab fa-youtube"></i> YouTube
-            </a>
-            <a href="https://go.iantweedie.biz/LinkedIn-Linktree" target="_blank" rel="noopener" class="author-link">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://medium.com/@ian.tweedie" target="_blank" rel="noopener" class="author-link">
-              <i class="fab fa-medium"></i> Medium
-            </a>
-            <a href="https://iantweedie.biz" target="_blank" rel="noopener" class="author-link">
-              <i class="fas fa-globe"></i> Website
-            </a>
+            <a href="https://iantweedie.biz" target="_blank" rel="noopener" class="author-link">🌐 iantweedie.biz</a>
+            <a href="https://techtweedie.github.io" target="_blank" rel="noopener" class="author-link">📝 TechTweedie Blog</a>
+            <a href="https://github.com/itweedie" target="_blank" rel="noopener" class="author-link"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://youtube.com/@techtweedie" target="_blank" rel="noopener" class="author-link"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="https://go.iantweedie.biz/LinkedIn-Linktree" target="_blank" rel="noopener" class="author-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
           </div>
         </div>
       </div>

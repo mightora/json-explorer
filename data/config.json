@@ -1,22 +1,22 @@
 {
   "site": {
-    "name": "JSON Explorer Pro",
-    "tagline": "The ultimate browser-based JSON workspace",
-    "description": "Explore, analyse, diff, transform and visualise JSON instantly — all in your browser, no data leaves your machine.",
+    "name": "JSON Explorer",
+    "tagline": "Free developer tools by Mightora.io",
+    "description": "Explore, analyse, diff, transform and visualise JSON instantly — all in your browser, no data leaves your machine. A free tool by Mightora.io.",
     "url": "https://mightora.github.io/json-explorer/",
     "version": "1.0.0"
   },
   "hero": {
-    "heading": "JSON Explorer Pro",
-    "subheading": "The Ultimate JSON Workspace",
+    "heading": "JSON Explorer",
+    "subheading": "Free Developer Tools by Mightora.io",
     "description": "Parse, explore, diff, transform and visualise JSON instantly. Everything runs in your browser — your data never leaves your machine.",
     "cta_primary": { "text": "Start Exploring", "action": "focus-input" },
     "cta_secondary": { "text": "Load Sample", "action": "load-sample" }
   },
   "author": {
     "name": "Ian Tweedie",
-    "role": "Microsoft MVP | Power Platform Architect | Developer",
-    "bio": "Ian Tweedie is a Microsoft MVP and Power Platform architect at Tweed.technology. He creates free developer tools through Mightora and shares knowledge via the TechTweedie blog and YouTube channel.",
+    "role": "Power Platform Architect | Developer | Technology Consultant",
+    "bio": "Ian Tweedie is a technology consultant and developer based in North East England. He creates free developer tools through Mightora and shares knowledge via the TechTweedie blog and YouTube channel.",
     "image": "https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/author/ian-tweedie-presenting-4.png",
     "links": [
       { "label": "GitHub", "url": "https://github.com/itweedie", "icon": "fab fa-github" },
@@ -41,8 +41,8 @@
     "transform": true
   },
   "metadata": {
-    "ogTitle": "JSON Explorer Pro — Browser-based JSON Workspace",
-    "ogDescription": "Explore, diff, transform and visualise JSON instantly. All processing in your browser. No uploads.",
+    "ogTitle": "JSON Explorer — Mightora.io Free Developer Tools",
+    "ogDescription": "Explore, diff, transform and visualise JSON instantly. Free tool by Mightora.io. All processing in your browser. No uploads.",
     "ogImage": "https://mightora.github.io/json-explorer/assets/images/og-image.png",
     "twitterCard": "summary_large_image",
     "keywords": "JSON, JSON explorer, JSON formatter, JSON diff, JSON visualiser, JSON tools, developer tools"

@@ -85,6 +85,9 @@ const Visualise = (() => {
       case 'tree':
         renderStructureTree(data, container);
         break;
+      case 'boxes':
+        renderNestedBoxes(data, container);
+        break;
       default:
         const pre = document.createElement('pre');
         pre.className = 'json-output';
@@ -454,5 +457,80 @@ const Visualise = (() => {
     return Array.from({ length: n }, (_, i) => palette[i % palette.length]);
   }
 
-  return { render, autoDetect, renderTable, exportCSV };
+  /* ── Nested Boxes Visualiser ───────────────────────────────── */
+  function renderNestedBoxes(data, container) {
+    const wrap = document.createElement('div');
+    wrap.className = 'nested-box-wrap';
+    const intro = document.createElement('p');
+    intro.style.cssText = 'font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem';
+    intro.textContent = 'Each coloured box represents an object or array. Colour shows nesting depth. Scroll to explore.';
+    wrap.appendChild(intro);
+    wrap.appendChild(_buildNBox(data, 'root', 0));
+    container.appendChild(wrap);
+  }
+
+  function _escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function _buildNBox(val, key, depth, maxDepth = 8, maxChildren = 30) {
+    const depthClass = 'nbox-d' + (depth % 6);
+    const type = val === null ? 'null' : Array.isArray(val) ? 'array' : typeof val;
+    const isContainer = type === 'object' || type === 'array';
+
+    const box = document.createElement('div');
+    box.className = `nbox ${depthClass}${isContainer ? '' : ' nbox-leaf'}`;
+
+    const label = document.createElement('div');
+    label.className = 'nbox-label';
+
+    const keySpan = document.createElement('span');
+    keySpan.className = 'nbox-key';
+    keySpan.textContent = key;
+    label.appendChild(keySpan);
+
+    if (isContainer) {
+      const entries = Array.isArray(val) ? val : Object.entries(val);
+      const count = Array.isArray(val) ? val.length : Object.keys(val).length;
+      const badge = document.createElement('span');
+      badge.className = 'nbox-type-badge';
+      badge.textContent = type === 'array' ? `[ ${count} items ]` : `{ ${count} keys }`;
+      label.appendChild(badge);
+      box.appendChild(label);
+
+      if (depth < maxDepth && count > 0) {
+        const children = document.createElement('div');
+        children.className = 'nbox-children';
+        const items = Array.isArray(val) ? val : Object.values(val);
+        const keys  = Array.isArray(val) ? val.map((_,i) => String(i)) : Object.keys(val);
+        const shown = Math.min(count, maxChildren);
+        for (let i = 0; i < shown; i++) {
+          children.appendChild(_buildNBox(items[i], keys[i], depth + 1, maxDepth, maxChildren));
+        }
+        if (count > maxChildren) {
+          const more = document.createElement('div');
+          more.className = 'nbox-more';
+          more.textContent = `… ${count - maxChildren} more items not shown`;
+          children.appendChild(more);
+        }
+        box.appendChild(children);
+      }
+    } else {
+      const colon = document.createElement('span');
+      colon.className = 'nbox-colon';
+      colon.textContent = ':';
+      label.appendChild(colon);
+
+      const valStr = val === null ? 'null' : String(val);
+      const valEl = document.createElement('span');
+      valEl.className = `nbox-val nbox-val-${type}`;
+      valEl.textContent = valStr.length > 60 ? valStr.substring(0, 57) + '…' : valStr;
+      label.appendChild(valEl);
+      box.appendChild(label);
+    }
+
+    return box;
+  }
+
+  return { render, autoDetect, renderTable, exportCSV, renderNestedBoxes };
 })();
