@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mightora.github.io/json-explorer/sitemap.xml
+Sitemap: https://json-explorer.mightora.io/sitemap.xml

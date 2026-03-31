@@ -8,22 +8,26 @@
   <meta name="keywords" content="JSON explorer, JSON formatter, JSON validator, JSON diff, JSON visualiser, JSON transformer, JSON tools, free JSON tool, browser JSON, developer tools, JSON pretty print, JSON compare, JSON flatten, mightora">
   <meta name="author" content="Ian Tweedie / Mightora.io">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://mightora.github.io/json-explorer/">
-  <link rel="sitemap" type="application/xml" href="/json-explorer/sitemap.xml">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1f1f1f" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="assets/images/og-image.png">
+  <link rel="apple-touch-icon" href="assets/images/og-image.png">
+  <link rel="canonical" href="https://json-explorer.mightora.io/">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
   <!-- Open Graph -->
   <meta property="og:title"       content="JSON Explorer — Free JSON Tool by Mightora.io">
   <meta property="og:description" content="Free browser-based JSON tool. Explore, format, diff, transform and visualise JSON. 100% private — your data never leaves your browser.">
   <meta property="og:type"        content="website">
-  <meta property="og:url"         content="https://mightora.github.io/json-explorer/">
-  <meta property="og:image"       content="https://mightora.github.io/json-explorer/assets/images/og-image.png">
+  <meta property="og:url"         content="https://json-explorer.mightora.io/">
+  <meta property="og:image"       content="https://json-explorer.mightora.io/assets/images/og-image.png">
   <meta property="og:site_name"   content="Mightora.io">
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="JSON Explorer — Free JSON Tool by Mightora.io">
   <meta name="twitter:description" content="Explore, diff, transform and visualise JSON instantly. Free, private and browser-only.">
-  <meta name="twitter:image"       content="https://mightora.github.io/json-explorer/assets/images/og-image.png">
+  <meta name="twitter:image"       content="https://json-explorer.mightora.io/assets/images/og-image.png">
   <meta name="twitter:site"        content="@TechTweedie">
 
   <!-- JSON-LD: WebApplication -->
@@ -32,7 +36,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "JSON Explorer",
-    "url": "https://mightora.github.io/json-explorer/",
+    "url": "https://json-explorer.mightora.io/",
     "description": "Free browser-based JSON tool. Explore, format, diff, transform and visualise JSON. Your data never leaves your browser.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Any",
@@ -88,6 +92,36 @@
         "@type": "Question",
         "name": "What is a JWT token?",
         "acceptedAnswer": { "@type": "Answer", "text": "A JWT (JSON Web Token) is a compact, URL-safe way to represent information between two parties. It consists of three parts separated by dots: a header, a payload, and a signature. JSON Explorer's JWT decoder lets you inspect the header and payload without sending the token to any server." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I format or pretty print JSON?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Paste your JSON into the Explorer tab in JSON Explorer and it will be automatically formatted and syntax-highlighted. The tree view lets you expand and collapse nested objects and arrays, making even large JSON documents easy to navigate." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I validate JSON online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Paste your JSON into JSON Explorer. If the JSON is invalid, you will see a clear error message highlighting exactly where the syntax error is. Valid JSON will be parsed and displayed immediately. No data is sent to any server — validation runs entirely in your browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I flatten nested JSON?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the Transform tab in JSON Explorer and select the Flatten operation. This converts deeply nested JSON objects into a flat key-value structure using dot notation for nested keys (e.g. address.city). You can also unflatten back to nested format." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I scan JSON for sensitive data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON Explorer includes a built-in sensitive data scanner in the Insights tab. It automatically detects common patterns such as API keys, passwords, tokens, email addresses, credit card numbers and private keys. All scanning happens locally in your browser — your data is never transmitted." }
+      },
+      {
+        "@type": "Question",
+        "name": "What JSON transformation operations are available?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JSON Explorer's Transform tab supports: flatten (deep to flat dot-notation), unflatten (restore nested structure), sort keys (alphabetical), minify (remove whitespace), remove nulls, extract keys, and more. All transformations are instant and run in the browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does JSON Explorer work with large JSON files?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Because all processing runs locally in your browser there are no file size limits imposed by a server. Performance depends on your device, but JSON Explorer handles files in the tens of megabytes without any upload delays." }
       }
     ]
   }
