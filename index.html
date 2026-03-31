@@ -107,6 +107,9 @@
   <!-- js-yaml (for remote YAML footer) -->
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
+  <!-- Shared UI (header, footer, author) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mightora/shared-ui@v1.0.0/shared.css">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -115,50 +118,14 @@
   <!-- ═══════════════════════════════════════════════════════
        HEADER
   ═══════════════════════════════════════════════════════ -->
-  <header class="site-header">
-    <div class="container header-inner">
-
-      <a href="/" class="site-logo" aria-label="JSON Explorer — Mightora.io">
-        <!-- Light-mode logo -->
-        <img
-          src="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png"
-          alt="Mightora.io"
-          class="site-logo-brand-img logo-light"
-          onerror="this.style.display='none'"
-        >
-        <!-- Dark-mode logo (inverted) -->
-        <img
-          src="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900_invert.png"
-          alt="Mightora.io"
-          class="site-logo-brand-img logo-dark"
-          onerror="this.style.display='none'"
-        >
-        <span class="site-logo-divider" aria-hidden="true"></span>
-        <span class="site-logo-text">JSON <span>Explorer</span></span>
-      </a>
-
-      <nav class="header-nav" id="header-nav" aria-label="Main navigation">
-        <a href="#workspace">Workspace</a>
-        <a href="#workspace" data-activate-tab="tab-insights">Insights</a>
-        <a href="#privacy-section">Privacy</a>
-        <a href="#help-section">Help</a>
-        <a href="https://mightora.io" target="_blank" rel="noopener" class="ext-link">Mightora.io ↗</a>
-      </nav>
-
-      <div class="flex-gap">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-          <!-- Sun icon (shown in dark mode to switch to light) -->
-          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <!-- Moon icon (shown in light mode to switch to dark) -->
-          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open navigation menu">
-          <i class="fas fa-bars" aria-hidden="true"></i>
-        </button>
-      </div>
-
-    </div>
-  </header>
+  <mightora-header
+    site-name="JSON Explorer"
+    site-name-html="JSON <span>Explorer</span>"
+    site-url="/"
+    logo-light="https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png"
+    theme-key="json-explorer-theme"
+    nav-links='[{"label":"Workspace","url":"#workspace"},{"label":"Insights","url":"#workspace","data-activate-tab":"tab-insights"},{"label":"Privacy","url":"#privacy-section"},{"label":"Help","url":"#help-section"},{"label":"Mightora.io ↗","url":"https://mightora.io","ext":true}]'>
+  </mightora-header>
 
   <!-- ═══════════════════════════════════════════════════════
        HERO
@@ -1054,61 +1021,17 @@ Example:
   <!-- ═══════════════════════════════════════════════════════
        AUTHOR SECTION
   ═══════════════════════════════════════════════════════ -->
-  <section class="author-section" id="author-section">
-    <div class="author-section-overlay">
-      <div class="author-section-inner">
-        <div class="author-photos">
-          <img
-            src="https://techtweedie.github.io/images/author/ian-tweedie-sq2_hu_a380911c6f4726de.png"
-            alt="Ian Tweedie"
-            class="author-avatar"
-            onerror="this.style.display='none'"
-          >
-          <img
-            src="https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/site/main-logo.png"
-            alt="TechTweedie"
-            class="author-blog-logo"
-            onerror="this.style.display='none'"
-          >
-        </div>
-        <div class="author-text">
-          <h2 class="author-heading">Built by TechTweedie</h2>
-          <p class="author-bio">
-            JSON Explorer is a free tool created by <strong>Ian Tweedie</strong> — also known online as <strong>TechTweedie</strong>.
-            Ian is a technology consultant and developer based in North East England with a background in enterprise IT,
-            cloud infrastructure, and developer tooling. He builds free, practical tools through
-            <strong>Mightora.io</strong> and writes about technology on his blog.
-          </p>
-          <div class="author-links">
-            <a href="https://iantweedie.biz" target="_blank" rel="noopener" class="author-link">🌐 iantweedie.biz</a>
-            <a href="https://techtweedie.github.io" target="_blank" rel="noopener" class="author-link">📝 TechTweedie Blog</a>
-            <a href="https://github.com/itweedie" target="_blank" rel="noopener" class="author-link"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://youtube.com/@techtweedie" target="_blank" rel="noopener" class="author-link"><i class="fab fa-youtube"></i> YouTube</a>
-            <a href="https://go.iantweedie.biz/LinkedIn-Linktree" target="_blank" rel="noopener" class="author-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <mightora-author id="author-section" config-url="data/config.json"></mightora-author>
 
   <!-- ═══════════════════════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-main" id="footer-main">
-        <!-- Rendered by app.js from footer.json -->
-      </div>
-    </div>
-
-    <div id="footer-brands">
-      <!-- Rendered by app.js from footer.json -->
-    </div>
-
+  <mightora-footer
+    yaml-url="https://raw.githubusercontent.com/mightora/mightora.io/refs/heads/main/data/footer.yaml">
     <div class="container">
       <div class="footer-bottom">
         <div class="footer-copy">
-          &copy; <span id="footer-year"></span>
+          &copy; <span class="footer-year"></span>
           <a href="https://mightora.io" target="_blank" rel="noopener">Mightora.io</a>
           &amp; <a href="https://techtweedie.github.io" target="_blank" rel="noopener">TechTweedie</a>.
           Built by <a href="https://iantweedie.biz" target="_blank" rel="noopener">Ian Tweedie</a>.
@@ -1120,7 +1043,7 @@ Example:
         </div>
       </div>
     </div>
-  </footer>
+  </mightora-footer>
 
   <!-- Toast container -->
   <div class="toast-container" id="toast-container"></div>
@@ -1137,11 +1060,9 @@ Example:
   <script src="assets/js/sensitive-data.js"></script>
   <script src="assets/js/jwt-helper.js"></script>
   <script src="assets/js/ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mightora/shared-ui@v1.0.0/components.js"></script>
   <script src="assets/js/app.js"></script>
 
-  <script>
-    // Set copyright year
-    document.getElementById('footer-year').textContent = new Date().getFullYear();
-  </script>
+
 </body>
 </html>

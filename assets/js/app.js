@@ -11,10 +11,8 @@ const App = (() => {
 
   /* ── Init ──────────────────────────────────────────────────── */
   function init() {
-    UI.initTheme();
     UI.initToast();
     loadConfig();
-    loadFooter();
     bindEvents();
     restoreSession();
   }
@@ -32,85 +30,8 @@ const App = (() => {
       if (heroSub) heroSub.textContent = cfg.hero.subheading;
       const heroDesc = document.querySelector('.hero-desc');
       if (heroDesc) heroDesc.textContent = cfg.hero.description;
-      // Author
-      renderAuthor(cfg.author);
+      // Author — rendered by <mightora-author> component
     } catch (_) { /* silently ignore - config is optional */ }
-  }
-
-  function renderAuthor(author) {
-    const sec = document.getElementById('author-section');
-    if (!sec || !author) return;
-    const avatarUrl  = 'https://techtweedie.github.io/images/author/ian-tweedie-sq2_hu_a380911c6f4726de.png';
-    const blogLogo   = 'https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/site/main-logo.png';
-    const brandLabel = author.branding ? author.branding.label : 'TechTweedie';
-    sec.innerHTML = `
-      <div class="author-section-overlay">
-        <div class="author-section-inner">
-          <div class="author-photos">
-            <img src="${UI.escHtml(avatarUrl)}" alt="${UI.escHtml(author.name)}" class="author-avatar" onerror="this.style.display='none'">
-            <img src="${UI.escHtml(blogLogo)}" alt="${UI.escHtml(brandLabel)}" class="author-blog-logo" onerror="this.style.display='none'">
-          </div>
-          <div class="author-text">
-            <h2 class="author-heading">Built by ${UI.escHtml(brandLabel)}</h2>
-            <p class="author-bio">${UI.escHtml(author.bio)}</p>
-            <div class="author-links">
-              ${(author.links || []).map(l => `<a href="${UI.escHtml(l.url)}" target="_blank" rel="noopener" class="author-link">${l.icon ? `<i class="${UI.escHtml(l.icon)}"></i> ` : ''}${UI.escHtml(l.label)}</a>`).join('')}
-            </div>
-          </div>
-        </div>
-      </div>`;
-  }
-
-  async function loadFooter() {
-    try {
-      const res = await fetch('https://raw.githubusercontent.com/mightora/mightora.io/refs/heads/main/data/footer.yaml');
-      const text = await res.text();
-      const data = jsyaml.load(text);
-      renderFooter(data);
-    } catch (_) { /* silently ignore */ }
-  }
-
-  function renderFooter(data) {
-    const main = document.getElementById('footer-main');
-    const brands = document.getElementById('footer-brands');
-    if (!main || !data) return;
-
-    // Group sections by column
-    const cols = {};
-    (data.sections || []).forEach(s => {
-      if (!cols[s.column]) cols[s.column] = [];
-      cols[s.column].push(s);
-    });
-
-    main.innerHTML = Object.values(cols).map(sections => `
-      <div class="footer-col">
-        <div class="footer-col-sections">
-          ${sections.sort((a,b) => a.position - b.position).map(s => `
-            <div>
-              <div class="footer-section-title">${UI.escHtml(s.title)}</div>
-              <ul class="footer-links">
-                ${s.links.map(l => `<li><a href="${UI.escHtml(l.url)}">${UI.escHtml(l.name)}</a></li>`).join('')}
-              </ul>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `).join('');
-
-    if (brands && data.brands) {
-      brands.innerHTML = `
-        <div class="container">
-          <div class="footer-brands">
-            ${data.brands.map(b => `
-              <a href="${UI.escHtml(b.url)}" target="_blank" rel="noopener" class="footer-brand">
-                <img src="${UI.escHtml(b.logo)}" alt="${UI.escHtml(b.name)}" onerror="this.style.display='none'">
-                <span class="footer-brand-desc">${UI.escHtml(b.description)}</span>
-              </a>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
   }
 
   /* ── Session Restore ───────────────────────────────────────── */
@@ -138,17 +59,6 @@ const App = (() => {
 
   /* ── Event Binding ─────────────────────────────────────────── */
   function bindEvents() {
-    // Theme toggle
-    const themeBtn = document.getElementById('theme-toggle');
-    if (themeBtn) themeBtn.addEventListener('click', UI.toggleTheme);
-
-    // Mobile menu
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const headerNav = document.querySelector('.header-nav');
-    if (menuBtn && headerNav) {
-      menuBtn.addEventListener('click', () => headerNav.classList.toggle('open'));
-    }
-
     // JSON input textarea
     const textarea = document.getElementById('json-input');
     if (textarea) {
