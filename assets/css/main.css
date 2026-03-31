@@ -1,8 +1,60 @@
 /* ============================================================
    JSON Explorer — Mightora.io  (site-specific styles)
-   Design tokens, base styles, header, footer and author are
-   provided by shared-ui/shared.css which loads before this file.
+   Design tokens are duplicated here so the page renders
+   correctly even if the shared-ui CDN link fails to load.
    ============================================================ */
+
+/* ── Design tokens (mirrored from shared-ui/shared.css) ─────── */
+:root {
+  --primary:        #111827;
+  --primary-light:  #059669;
+  --accent:         #059669;
+  --accent-hover:   #047857;
+  --success:        #065f46;
+  --success-light:  #059669;
+  --warning:        #e76f51;
+  --danger:         #d62828;
+  --danger-light:   #f07070;
+  --info:           #0096c7;
+  --text:           #111827;
+  --text-muted:     #6b7280;
+  --text-light:     #9ca3af;
+  --bg:             #f9fafb;
+  --bg-card:        #ffffff;
+  --bg-hover:       #f3f4f6;
+  --border:         #e5e7eb;
+  --border-focus:   #059669;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.08);
+  --shadow:         0 4px 12px rgba(0,0,0,.10);
+  --shadow-lg:      0 8px 24px rgba(0,0,0,.12);
+  --radius-sm:      4px;
+  --radius:         8px;
+  --radius-lg:      12px;
+  --radius-xl:      16px;
+  --font-sans:      system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --header-h:       60px;
+  --transition:     .2s ease;
+}
+[data-theme="dark"] {
+  --primary:        #1f1f1f;
+  --primary-light:  #34d399;
+  --accent:         #34d399;
+  --accent-hover:   #6ee7b7;
+  --success:        #022c22;
+  --success-light:  #34d399;
+  --text:           #f3f4f6;
+  --text-muted:     #9ca3af;
+  --text-light:     #6b7280;
+  --bg:             #111827;
+  --bg-card:        #1f1f1f;
+  --bg-hover:       #2a2a2a;
+  --border:         #374151;
+  --border-focus:   #34d399;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.3);
+  --shadow:         0 4px 12px rgba(0,0,0,.4);
+  --shadow-lg:      0 8px 24px rgba(0,0,0,.5);
+}
 
 /* ── Card ───────────────────────────────────────────────────── */
 .card {
