@@ -92,15 +92,6 @@ Then open [http://localhost:8080](http://localhost:8080).
 
 ---
 
-## 🌐 GitHub Pages Deployment
-
-1. Push to `main` branch
-2. Go to **Settings → Pages**
-3. Set source to **Deploy from a branch** → `main` → `/ (root)`
-4. Your site will be live at `https://<org>.github.io/json-explorer/`
-
----
-
 ## ⚙️ Customisation
 
 ### Central Config (`data/config.json`)
@@ -158,7 +149,7 @@ json-explorer/
 
 ## 👤 Author
 
-**Ian Tweedie** — Microsoft MVP, Power Platform Architect
+**Ian Tweedie** — Power Platform Architect
 
 - 🌐 [iantweedie.biz](https://iantweedie.biz)
 - 📺 [YouTube @techtweedie](https://youtube.com/@techtweedie)
